@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1493305516 source:c:\users\i318443\documents\code-practice\practice\main.cpp
+	<iostream>
+
+1494253763 source:c:\users\i318443\documents\code-practice\practice\tree.cpp
+	<stdio.h>
+	<malloc.h>
+	<iostream>
+
