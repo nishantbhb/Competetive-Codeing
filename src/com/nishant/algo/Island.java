@@ -3,7 +3,7 @@ package com.nishant.algo;
 import java.util.Scanner;
 
 //if previous row and column are not 1 then increase island counter, 
-//in case of H like shape check if both previous row and column are 1 
+//in case of inverted L like shape check if both previous row and column are 1 
 //and previous diagonal cell is 0 then decrease counter
 public class Island {
 
