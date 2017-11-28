@@ -37,11 +37,11 @@ class TaskEvenOdd implements Runnable {
 
 class Printer {
 
-	boolean isOdd = false;
+	boolean isEven = false;
 
 	synchronized void printEven(int number) {
 
-		while (isOdd == false) {
+		while (isEven == false) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -49,12 +49,12 @@ class Printer {
 			}
 		}
 		System.out.println("Even:" + number);
-		isOdd = false;
+		isEven = false;
 		notifyAll();
 	}
 
 	synchronized void printOdd(int number) {
-		while (isOdd == true) {
+		while (isEven == true) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -62,7 +62,7 @@ class Printer {
 			}
 		}
 		System.out.println("Odd:" + number);
-		isOdd = true;
+		isEven = true;
 		notifyAll();
 	}
 
