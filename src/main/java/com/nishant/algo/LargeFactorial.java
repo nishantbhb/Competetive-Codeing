@@ -24,6 +24,7 @@ public class LargeFactorial {
                     fact[size] = carry % 10;
                     carry /= 10;
                     size++;
+
                 }
         }
 
