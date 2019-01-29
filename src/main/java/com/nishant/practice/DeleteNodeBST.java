@@ -28,12 +28,7 @@ class TreeBuilder {
                 while (curr.left != null)
                     curr = curr.left;
                 root.val = curr.val;
-                if (curr.right != null)
-                    curr = curr.right;
-                else
-                    curr = null;
-
-                TreeNode curr1 = curr;
+                root.right = deleteNode(root.right, key);
             }
 
         } else if (root.val > key)
