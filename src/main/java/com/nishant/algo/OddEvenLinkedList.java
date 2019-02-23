@@ -3,7 +3,7 @@ package com.nishant.algo;
 
 class ListNode {
     ListNode next;
-    private int val;
+    int val;
 
     ListNode(int x) {
         val = x;
