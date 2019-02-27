@@ -24,32 +24,26 @@ public class CopyRandomList {
     static Node copyRandomList(Node head) {
         if (head == null)
             return null;
-        Map<Node, Integer> origPos = new HashMap<>();
-        Map<Integer, Node> newPos = new HashMap<>();
+        Map<Node, Node> origToCopy = new HashMap<>();
         Node ptr = head;
         Node newHead = new Node();
         newHead.val = head.val;
         Node temp = newHead;
         ptr = ptr.next;
-        origPos.put(head, 1);
-        newPos.put(1, newHead);
-        int pos = 2;
+        origToCopy.put(head, temp);
         while (ptr != null) {
-            origPos.put(ptr, pos);
             temp.next = new Node();
             temp = temp.next;
             temp.val = ptr.val;
-            newPos.put(pos, temp);
+            origToCopy.put(ptr, temp);
             ptr = ptr.next;
-            pos++;
         }
         temp = newHead;
         ptr = head;
         while (ptr != null) {
-            if (ptr.random != null) {
-                Integer index = origPos.get(ptr.random);
-                temp.random = newPos.get(index);
-            }
+            if (ptr.random != null)
+                temp.random = origToCopy.get(ptr.random);
+
             temp = temp.next;
             ptr = ptr.next;
 
