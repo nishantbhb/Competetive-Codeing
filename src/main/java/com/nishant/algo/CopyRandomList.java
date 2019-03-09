@@ -4,24 +4,22 @@ package com.nishant.algo;
 import java.util.HashMap;
 import java.util.Map;
 
-class Node {
-    public int val;
-    public Node next;
-    public Node random;
-
-    public Node() {
-    }
-
-    public Node(int _val, Node _next, Node _random) {
-        val = _val;
-        next = _next;
-        random = _random;
-    }
-}
-
 
 public class CopyRandomList {
-    static Node copyRandomList(Node head) {
+
+    public static void main(String[] args) {
+        /*Node head = new Node();
+        head.val = 1;
+        Node heaDNext = new Node();
+        heaDNext.val = 2;
+        heaDNext.random = heaDNext;
+        head.random = heaDNext;
+        head.next = heaDNext;
+        Node newHead = copyRandomList(head);*/
+
+    }
+
+    Node copyRandomList(Node head) {
         if (head == null)
             return null;
         Map<Node, Node> origToCopy = new HashMap<>();
@@ -52,17 +50,19 @@ public class CopyRandomList {
 
     }
 
+    private class Node {
+        public int val;
+        public Node next;
+        public Node random;
 
-    public static void main(String[] args) {
-        Node head = new Node();
-        head.val = 1;
-        Node heaDNext = new Node();
-        heaDNext.val = 2;
-        heaDNext.random = heaDNext;
-        head.random = heaDNext;
-        head.next = heaDNext;
-        Node newHead = copyRandomList(head);
+        public Node() {
+        }
 
+        public Node(int _val, Node _next, Node _random) {
+            val = _val;
+            next = _next;
+            random = _random;
+        }
     }
 
 }
