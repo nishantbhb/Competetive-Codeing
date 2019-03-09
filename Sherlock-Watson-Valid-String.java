@@ -41,67 +41,67 @@ import java.util.Scanner;
 
 public class Test1 {
 
-	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-		String input[] = in.nextLine().split("");
-		
-		//to store the count of each letter
-		Map<String, Integer> ltr = new HashMap<String, Integer>();
-		for (int i = 0; i < input.length; i++) {
-			if (ltr.containsKey(input[i])) {
-				int val = ltr.get(input[i]);
-				val++;
-				ltr.put(input[i], val);
-			} else {
-				ltr.put(input[i], 1);
-			}
-		}
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String input[] = in.nextLine().split("");
 
-		//to store the distinct letter-counts
-		Map<Integer, Integer> cnt = new HashMap<Integer, Integer>();
+        //to store the count of each letter
+        Map<String, Integer> ltr = new HashMap<String, Integer>();
+        for (int i = 0; i < input.length; i++) {
+            if (ltr.containsKey(input[i])) {
+                int val = ltr.get(input[i]);
+                val++;
+                ltr.put(input[i], val);
+            } else {
+                ltr.put(input[i], 1);
+            }
+        }
 
-		for (Entry<String, Integer> m : ltr.entrySet()) {
-			int k = m.getValue();
-			if (cnt.containsKey(k)) {
-				int val = cnt.get(k);
-				val++;
-				cnt.put(k, val);
-			} else {
-				cnt.put(k, 1);
-			}
-		}
-		//to check if valid string
-		int flag = 0;
+        //to store the distinct letter-counts
+        Map<Integer, Integer> cnt = new HashMap<Integer, Integer>();
 
-		//only one letter for whole string or equal frequency of each letter
-		if (cnt.size() == 1) {
-			flag = 1;
-		} else if (cnt.size() == 2) { //if only two distinct frequency of letters
-			int a[] = new int[2];
-			int b[] = new int[2];
-			int i = 0;
-			for (Entry<Integer, Integer> m : cnt.entrySet()) {
-				a[i] = m.getKey(); //letter frequency
-				b[i] = m.getValue(); //Occurrence of frequency
-				i++;
-			}
-			//if only one distinct frequency 
-			if (b[1] == 1 || b[0] == 1) {
-				if (a[0] == 1 || a[1] == 1) {//if a distinct frequency letter occurs only once
-					flag = 1;
-				} else if (((a[0] - a[1]) == 1) || ((a[1] - a[0]) == 1))//if frequency difference is just 1
-					if ((a[0] < a[1] && b[0] > b[1]) || (a[0] > a[1] && b[0] < b[1])) {//to check if letter to be deleted occurs only once
-						flag = 1;
-					}
+        for (Entry<String, Integer> m : ltr.entrySet()) {
+            int k = m.getValue();
+            if (cnt.containsKey(k)) {
+                int val = cnt.get(k);
+                val++;
+                cnt.put(k, val);
+            } else {
+                cnt.put(k, 1);
+            }
+        }
+        //to check if valid string
+        int flag = 0;
 
-			}
-		}
-		if (flag == 1)
-			System.out.println("YES");
+        //only one letter for whole string or equal frequency of each letter
+        if (cnt.size() == 1) {
+            flag = 1;
+        } else if (cnt.size() == 2) { //if only two distinct frequency of letters
+            int a[] = new int[2];
+            int b[] = new int[2];
+            int i = 0;
+            for (Entry<Integer, Integer> m : cnt.entrySet()) {
+                a[i] = m.getKey(); //letter frequency
+                b[i] = m.getValue(); //Occurrence of frequency
+                i++;
+            }
+            //if only one distinct frequency
+            if (b[1] == 1 || b[0] == 1) {
+                if (a[0] == 1 || a[1] == 1) {//if a distinct frequency letter occurs only once
+                    flag = 1;
+                } else if (((a[0] - a[1]) == 1) || ((a[1] - a[0]) == 1))//if frequency difference is just 1
+                    if ((a[0] < a[1] && b[0] > b[1]) || (a[0] > a[1] && b[0] < b[1])) {//to check if letter to be deleted occurs only once
+                        flag = 1;
+                    }
 
-		else
-			System.out.println("NO");
-		in.close();
-	}
+            }
+        }
+        if (flag == 1)
+            System.out.println("YES");
+
+        else
+            System.out.println("NO");
+        in.close();
+    }
 
 }
