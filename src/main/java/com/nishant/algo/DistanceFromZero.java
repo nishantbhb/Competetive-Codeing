@@ -53,4 +53,4 @@ class DistanceFromZero {
         updateDistance(matrix, m - 1, n, matrix[m][n]);
 
     }
-}}
+}
