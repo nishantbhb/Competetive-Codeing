@@ -7,6 +7,33 @@ import java.util.Map;
 
 class WordDictionary {
 
+    public boolean searchWord(TrieNode root, String word, int i) {
+        char currLetter = word.charAt(i);
+        String remWord = word.substring(i);
+        Map<Character, TrieNode> children = root.children;
+        if (remWord.length() == 1) {
+            if (currLetter != '.') {
+                TrieNode child = children.get(currLetter);
+                return child != null && child.eow;
+            } else {
+                return children.entrySet().stream().anyMatch(childNodes -> childNodes.getValue().eow);
+            }
+        }
+
+        if (currLetter == '.') {
+            for (Map.Entry<Character, TrieNode> trieNode : root.children.entrySet()) {
+                if (searchWord(trieNode.getValue(), word, i + 1))
+                    return true;
+            }
+        }
+        TrieNode child = children.get(currLetter);
+        if (child == null)
+            return false;
+        return searchWord(child, word, i + 1);
+
+
+    }
+
     private TrieNode root;
 
     /**
@@ -45,35 +72,6 @@ class WordDictionary {
         return searchWord(root, word, 0);
     }
 
-    public boolean searchWord(TrieNode root, String word, int i) {
-        char currLetter = word.charAt(i);
-        String remWord = word.substring(i);
-        Map<Character, TrieNode> children = root.children;
-        if (remWord.length() == 1) {
-            if (currLetter != '.') {
-                TrieNode child = children.get(currLetter);
-                return child != null && child.eow;
-            } else {
-                return children.entrySet().stream().anyMatch(childNodes -> childNodes.getValue().eow);
-            }
-        }
-
-        if (currLetter == '.') {
-            for (Map.Entry<Character, TrieNode> trieNode : root.children.entrySet()) {
-                if (searchWord(trieNode.getValue(), word, i + 1))
-                    return true;
-            }
-        } else {
-            TrieNode child = children.get(currLetter);
-            if (child == null)
-                return false;
-            return searchWord(child, word, i + 1);
-
-        }
-        return false;
-
-    }
-
     class TrieNode {
         char val;
         boolean eow;//end of word
@@ -88,6 +86,44 @@ class WordDictionary {
             this.val = val;
             children = new HashMap<>();
         }
+    }
+    /*
+    public boolean searchWord(TrieNode root, String word, int i) {
+        if (root == null)
+            return false;
+        if (word.length() == i)
+            return root.eow;
+        char currLetter = word.charAt(i);
+        Map<Character, TrieNode> children = root.children;
+
+        if (currLetter == '.') {
+            for (Map.Entry<Character, TrieNode> trieNode : root.children.entrySet()) {
+                if (searchWord(trieNode.getValue(), word, i + 1))
+                    return true;
+            }
+        }
+        TrieNode child = children.get(currLetter);
+        if (child == null)
+            return false;
+        return searchWord(child, word, i + 1);
+    }
+     */
+
+
+}
+
+class SearchWordTrie {
+
+
+    public static void main(String[] args) {
+        WordDictionary obj = new WordDictionary();
+        obj.addWord("bad");
+        obj.addWord("dad");
+        obj.addWord("mad");
+        System.out.println(obj.search("pad"));
+        System.out.println(obj.search("bad"));
+        System.out.println(obj.search(".ad"));
+        System.out.println(obj.search("b.."));
     }
 }
 
