@@ -8,7 +8,7 @@ class LengthLongestPath {
         int maxLen = 0;
         for (String s : paths) {
             int lev = s.lastIndexOf("\t") + 1;
-            int curLen = stack[lev] + s.length() - lev + 1;
+            int curLen = stack[lev] + s.length() - lev + 1; //extra 1 may be for "/" in path
             stack[lev + 1] = curLen;
             if (s.contains(".")) maxLen = Math.max(maxLen, curLen - 1);
         }
