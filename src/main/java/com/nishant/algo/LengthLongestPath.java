@@ -3,16 +3,17 @@ package com.nishant.algo;
 
 class LengthLongestPath {
     static int lengthLongestPath(String input) {
-        String[] paths = input.split("\n");
-        int[] stack = new int[paths.length + 1];
-        int maxLen = 0;
-        for (String s : paths) {
-            int len = s.lastIndexOf("\t") + 1;
-            int curLen = stack[len] + s.length() - len + 1; //extra 1 may be for "/" in path
-            stack[len + 1] = curLen;
-            if (s.contains(".")) maxLen = Math.max(maxLen, curLen - 1);
+        String[] tokens = input.split("\n");
+        int max = 0;
+        int[] level = new int[tokens.length + 1];
+        for (String dir : tokens) {
+            int index = dir.lastIndexOf("\t") + 1;
+            level[index + 1] = level[index] + dir.length() - index + 1;
+            if (dir.contains(".")) {
+                max = Math.max(level[index + 1] - 1, max);
+            }
         }
-        return maxLen;
+        return max;
     }
 
     public static void main(String[] args) {
