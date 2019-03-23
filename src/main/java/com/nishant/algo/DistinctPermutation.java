@@ -2,30 +2,41 @@ package com.nishant.algo;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 class DistinctPermutation {
     public static List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> list = new ArrayList<>();
-        backtrack(list, new ArrayList<>(), nums);
-        return list;
+        if (nums.length == 0)
+            return Collections.emptyList();
+
+        List<List<Integer>> output = new ArrayList<>();
+
+        permute(nums, 0, output);
+        return output;
     }
 
-    private static void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums) {
-        if (tempList.size() == nums.length) {
-            list.add(new ArrayList<>(tempList));
+    private static void permute(int[] nums, int currIndex, List<List<Integer>> output) {
+        if (currIndex == nums.length) {
+            List<Integer> temp = new ArrayList<>();
+            for (int num : nums)
+                temp.add(num);
+            output.add(temp);
         } else {
-            for (int num : nums) {
-                if (tempList.contains(num))
-                    continue; // element already exists, skip
-
-                tempList.add(num);
-                backtrack(list, tempList, nums);
-
-                tempList.remove(tempList.size() - 1);// remove the last element added in tempList
+            for (int i = currIndex; i < nums.length; i++) {
+                swap(nums, i, currIndex);// swap the elements to create permutation
+                permute(nums, currIndex + 1, output); //create permutation on remaining elements
+                swap(nums, i, currIndex); //revert the elements swapped
             }
         }
     }
+
+    private static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
 
     public static void main(String[] args) {
         System.out.println(permute(new int[]{0, 1, 2}));
