@@ -12,7 +12,8 @@ class MaxNonContigiousSum {
     private static int subsetHelper(int[] arr, int i, int sum) {
         if (i >= arr.length)
             return sum;
-        return Math.max(subsetHelper(arr, i + 2, sum + arr[i]), subsetHelper(arr, i + 1, sum));
+        return Math.max(arr[i],
+                Math.max(subsetHelper(arr, i + 2, sum + arr[i]), subsetHelper(arr, i + 1, sum)));
     }
 
 
