@@ -1,8 +1,23 @@
 package com.nishant.algo;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 class CountSubarraysum {
-    public static int subarraySum(int[] nums, int s) {
+    public static int subarraySum(int[] nums, int k) {
+        int count = 0, sum = 0;
+        Map<Integer, Integer> preSumFreq = new HashMap<>();
+        preSumFreq.put(0, 1);// for element where nums[i] == k
+        for (int num : nums) {
+            sum += num;
+            count += preSumFreq.getOrDefault(sum - k, 0);
+            preSumFreq.put(sum, preSumFreq.getOrDefault(sum, 0) + 1);
+        }
+        return count;
+
+
+        /*
         if (nums == null || nums.length == 0)
             return 0;
         int[] cumSum = new int[nums.length + 1];
@@ -19,6 +34,7 @@ class CountSubarraysum {
             }
         }
         return ctr;
+         */
     }
 
 
