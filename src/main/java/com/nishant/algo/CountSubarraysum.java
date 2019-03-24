@@ -11,7 +11,8 @@ class CountSubarraysum {
         preSumFreq.put(0, 1);// for element where nums[i] == k
         for (int num : nums) {
             sum += num;
-            count += preSumFreq.getOrDefault(sum - k, 0);
+            count += preSumFreq.getOrDefault(sum - k, 0);//if sum[i] - sum[j] = k
+            //count+= since current index will sum upto k with all the previous formations of sum -k
             preSumFreq.put(sum, preSumFreq.getOrDefault(sum, 0) + 1);
         }
         return count;
