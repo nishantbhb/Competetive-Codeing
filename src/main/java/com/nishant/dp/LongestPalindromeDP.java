@@ -5,29 +5,37 @@ class LongestPalindromeDP {
 
 
     public static String longestPalindrome(String s) {
+        if (s == null)
+            return "";
         int n = s.length();
-        int palindromeStartsAt = 0, maxLen = 0;
+        if (n == 0)
+            return "";
+        int maxLen = 0;
+        int palindromeStart = 0;
+        //indicates whether substring s starting at index i and ending at j is palindrome
+        boolean[][] palindrome = new boolean[n][n];
+        palindrome[0][0] = true;
 
-        boolean[][] dp = new boolean[n][n];
-        // dp[i][j] indicates whether substring s starting at index i and ending at j is palindrome
+        // find the max palindrome within this window of (j,i)
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j >= 0; j--) {
 
-        for (int i = n - 1; i >= 0; i--) { // keep increasing the possible palindrome string
-            for (int j = i; j < n; j++) { // find the max palindrome within this window of (i,j)
-
-                //check if substring between (i,j) is palindrome
-                dp[i][j] = (s.charAt(i) == s.charAt(j)) // chars at i and j should match
-                        &&
-                        (j - i < 3  // if window is less than 3, just end chars should match e.g. i = 0,  j= 1,2
-                                || dp[i + 1][j - 1]); // if window is > 3, substring (i+1, j-1) should be palindrome too
-
-                //update max palindrome string
-                if (dp[i][j] && (j - i + 1 > maxLen)) {
-                    palindromeStartsAt = i;
-                    maxLen = j - i + 1;
+                //check if substring between (j,i) is palindrome
+                // chars at i and j should match
+                // if window is less than 3, just end chars should match e.g. i = 0,  j= 1,2
+                // if window is > 3, substring (i-1, j+1) should be palindrome too
+                if ((s.charAt(i) == s.charAt(j)) && (i - j < 3 || palindrome[i - 1][j + 1])) {
+                    palindrome[i][j] = true;
+                    //update max palindrome string
+                    if (maxLen < i - j + 1) {
+                        maxLen = i - j + 1;
+                        palindromeStart = j;
+                    }
                 }
+
             }
         }
-        return s.substring(palindromeStartsAt, palindromeStartsAt + maxLen);
+        return s.substring(palindromeStart, palindromeStart + maxLen);
     }
 
 
