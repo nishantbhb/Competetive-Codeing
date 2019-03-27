@@ -5,29 +5,20 @@ class LongestParenthesesDP {
 
 
   public static int longestValidParentheses(String s) {
-    if (s == null || s.length() == 0) {
-      return 0;
-    }
-
-    int maxans = 0;
-
-    int[] len = new int[s.length() + 1];
-
-    for (int i = 1; i < s.length(); i++) {
-      if (s.charAt(i) == ')') {
-        if (s.charAt(i - 1) == '(') {
-          if (i >= 2) {
-            len[i] = len[i - 2] + 2;
-          } else {
-            len[i] = 2;
-          }
-        } else if (i - len[i - 1] > 0 && s.charAt(i - len[i - 1] - 1) == '(') {
-          len[i] = len[i - 1] + ((i - len[i - 1]) >= 2 ? len[i - len[i - 1] - 2] : 0) + 2;
-        }
-        maxans = Math.max(maxans, len[i]);
+    int[] dp = new int[s.length()];
+    int left = 0;
+    int max = 0;
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == '(') {
+        left++;
+      } else if (left > 0) {
+        dp[i] = dp[i - 1] + 2;
+        dp[i] += (i - dp[i]) >= 0 ? dp[i - dp[i]] : 0;
+        max = Math.max(max, dp[i]);
+        left--;
       }
     }
-    return maxans;
+    return max;
   }
 
   public static void main(String[] args) {
