@@ -1,4 +1,4 @@
-package com.nishant.algo;
+package com.nishant.dp;
 
 
 class NonContigiousSubsetSumDP {
