@@ -17,6 +17,7 @@ class RootToLeafSumPath {
     private List<List<Integer>> sum(TreeNode root, int currSum, int sum, List<Integer> nodes, List<List<Integer>> sumList) {
         if (root.left == null && root.right == null && root.val + currSum == sum) {
             nodes.add(root.val);
+            //deep copy, so that nodes.remove(nodes.size() - 1) works correctly and actual data from sumList is not removed
             List<Integer> newList = new ArrayList<>(nodes);
             sumList.add(newList);
             if (!nodes.isEmpty())
