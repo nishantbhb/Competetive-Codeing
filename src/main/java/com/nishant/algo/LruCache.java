@@ -14,7 +14,7 @@ remove() , it takes O(N) time. This can be
 optimized by storing a reference (iterator) to
 each key in a hash map. */
 
-class LRUCache {
+class LruCache {
     // store keys of cache
     private static Deque<Integer> dq;
     // store references of key in cache
@@ -22,7 +22,7 @@ class LRUCache {
     //maximum capacity of cache
     private static int cacheSize;
 
-    LRUCache(int n) {
+    LruCache(int n) {
         dq = new LinkedList<>();
         map = new HashSet<>();
         cacheSize = n;
