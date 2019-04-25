@@ -1,10 +1,10 @@
 package com.nishant.algo;
 
 public class NQueenProb {
-    static int N = 4;
-    static int ctr = 0;
+    private static int N = 4;
+    private static int ctr = 0;
 
-    static void printBoard(int board[][]) {
+    private static void printBoard(int[][] board) {
         System.out.println("Result");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++)
@@ -13,7 +13,7 @@ public class NQueenProb {
         }
     }
 
-    static boolean isSafe(int board[][], int row, int col) {
+    private static boolean isSafe(int[][] board, int row, int col) {
 
         for (int i = 0; i < col; i++)
             if (board[row][i] == 1)
@@ -35,11 +35,11 @@ public class NQueenProb {
         return true;
     }
 
-    static boolean solveNQUtil(int board[][], int col) {
-
+    private static boolean solveNQUtil(int[][] board, int col) {
+        printBoard(board);
         if (col == N) {
             ctr++;
-            printBoard(board);
+            //printBoard(board);
             return true;
         }
 
@@ -53,14 +53,11 @@ public class NQueenProb {
 
             }
         }
-        if (ctr > 0)
-            return false;
-        else
-            return true;
+        return ctr <= 0;
     }
 
-    static void solveNQ() {
-        int board[][] = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
+    private static void solveNQ() {
+        int[][] board = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
         // int board[][] = { { 0, 0 }, { 0, 0 } };
 
         if (solveNQUtil(board, 0)) {
@@ -71,7 +68,7 @@ public class NQueenProb {
 
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         solveNQ();
     }
 }
