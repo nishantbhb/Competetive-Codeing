@@ -1,30 +1,23 @@
 package com.nishant.practice;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 public class SerializeDeserializeBinaryTree {
-    private int maxDepth(TreeNode root) {
-        if (root == null)
-            return 0;
-        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
-    }
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         if (root == null)
             return null;
 
-        List<String> nodeList = new ArrayList<>();
+        LinkedList<String> nodeList = new LinkedList<>();
 
         LinkedList<TreeNode> levelQueue = new LinkedList<>();
         levelQueue.add(root);
 
         int height = maxDepth(root);
 
-        while (levelQueue.size() != 0) {
+        while (!levelQueue.isEmpty()) {
             int levelSize = levelQueue.size();
             while (levelSize != 0) {
                 TreeNode curr = levelQueue.remove();
@@ -46,10 +39,10 @@ public class SerializeDeserializeBinaryTree {
 
                 } else {
                     nodeList.add("null");
-                    if (height > 1) {
+                    /*if (height > 1){
                         levelQueue.add(null);//left child
                         levelQueue.add(null);//right child
-                    }
+                    }*/
                 }
 
             }
@@ -57,6 +50,12 @@ public class SerializeDeserializeBinaryTree {
         }
 
         return String.join(",", nodeList);
+    }
+
+    private int maxDepth(TreeNode root) {
+        if (root == null)
+            return 0;
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 
     // Decodes your encoded data to tree.
@@ -69,7 +68,7 @@ public class SerializeDeserializeBinaryTree {
 
         LinkedList<TreeNode> rootNodes = new LinkedList<>();
         rootNodes.add(rootNode);
-        while (rootNodes.size() != 0 && nodes.size() != 0) {
+        while (!rootNodes.isEmpty() && !nodes.isEmpty()) {
             TreeNode curr = rootNodes.remove();
             String left = nodes.remove();
             String right = nodes.remove();
@@ -78,20 +77,23 @@ public class SerializeDeserializeBinaryTree {
                 if (!left.equals("null")) {
                     curr.left = new TreeNode(Integer.parseInt(left));
                     rootNodes.add(curr.left);
-                } else {
-                    rootNodes.add(null);
                 }
+                /*else{
+                    rootNodes.add(null);
+                }*/
 
                 if (!right.equals("null")) {
                     curr.right = new TreeNode(Integer.parseInt(right));
                     rootNodes.add(curr.right);
-                } else {
-                    rootNodes.add(null);
                 }
-            } else {
+                /*else{
+                    rootNodes.add(null);
+                }*/
+            }
+            /*else{
                 rootNodes.add(null);//left
                 rootNodes.add(null);//right
-            }
+            }*/
         }
         return rootNode;
     }
