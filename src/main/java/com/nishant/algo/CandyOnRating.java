@@ -13,10 +13,11 @@ public class CandyOnRating {
         Arrays.fill(candies, 1);
         for (int i = 1; i < n; i++)
             if (A.get(i) > A.get(i - 1)) {
-                candies[i] = Math.max(candies[i], candies[i - 1] + 1);
+                candies[i] = candies[i - 1] + 1;
             }
         for (int i = n - 2; i >= 0; i--)
             if (A.get(i) > A.get(i + 1)) {
+                //using Math.max() check so that it doesn't hamper the candy distributed during first pass
                 candies[i] = Math.max(candies[i + 1] + 1, candies[i]);
             }
 
