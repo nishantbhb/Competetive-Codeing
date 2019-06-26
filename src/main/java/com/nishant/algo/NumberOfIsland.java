@@ -29,7 +29,7 @@ public class NumberOfIsland {
         grid[m][n] = '0';
         markVisited(grid, m, n - 1);
         markVisited(grid, m, n + 1);
-        markVisited(grid, m + 1, n);
+        markVisited(grid, m - 1, n);
         markVisited(grid, m + 1, n);
     }
 
