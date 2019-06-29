@@ -2,7 +2,7 @@ package com.nishant.algo;
 
 import java.util.*;
 
-public class HackerRankTest {
+public class BookingHackerRankTest {
 
     public static List<Integer> delta_encode(List<Integer> numbers) {
         // Write your code here
