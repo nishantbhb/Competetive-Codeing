@@ -50,7 +50,7 @@ public class BookingHackerRankTest {
                 j++;
             }
         }
-        return execReq - noOfCurrentAgents;
+        return max - noOfCurrentAgents;
 
     }
 
@@ -83,12 +83,12 @@ public class BookingHackerRankTest {
 
         //list.sort(Comparator.comparing(Map.Entry::getValue));
 
-        Map<Integer, Integer> sortedList = new LinkedHashMap<>();
+        List<Integer> sortedList = new ArrayList<>();
         for (Map.Entry<Integer, Integer> aa : list) {
-            sortedList.put(aa.getKey(), aa.getValue());
+            sortedList.add(aa.getKey());
         }
 
-        return new ArrayList<>(sortedList.keySet());
+        return sortedList;
 
 
     }
