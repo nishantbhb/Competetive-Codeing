@@ -1,4 +1,4 @@
-package com.nishant.practice;
+package com.nishant.algo;
 
 import java.util.Stack;
 
