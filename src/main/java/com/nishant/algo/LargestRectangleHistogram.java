@@ -20,6 +20,8 @@ public class LargestRectangleHistogram {
                 while (!stack.isEmpty() && heights[stack.peek()] > heights[i]) {
                     int j = stack.pop();
                     //for length in left till where this height is present
+                    //also it is guaranteed that least height will always be in stack until empty as everything on it's left
+                    //if removed would have been greater than the last in stack
                     int dist = stack.isEmpty() ? i : i - stack.peek() - 1;
                     max = Math.max(max, heights[j] * dist);
                 }
@@ -30,6 +32,8 @@ public class LargestRectangleHistogram {
         while (!stack.isEmpty()) {
             int j = stack.pop();
             //for length in left till where this height is present
+            //also it is guaranteed that least height will always be in stack until empty as everything on it's left
+            //if removed would have been greater than the last in stack
             int dist = stack.isEmpty() ? i : i - stack.peek() - 1;
             max = Math.max(max, heights[j] * dist);
         }
