@@ -6,9 +6,9 @@ class QuickSort {
 
     public static void main(String[] args) {
         int n = 5;
-        int[] arr = {1, 2, 1, 3, 4, 5};
+        int[] arr = {1, 2, 6, 7, 1, 3, 4, 5};
 
-        quickSort(arr, 0, 5);
+        quickSort(arr, 0, 7);
         // Write your code here
         for (int a : arr) {
             System.out.println(a);
@@ -28,18 +28,17 @@ class QuickSort {
 
 
     private static int partition(int[] arr, int l, int r) {
-        int i = l + 1;
-        int pivot = arr[l];
+        int pivot = arr[r];
+        int i = l;
 
-        //rearrange the array by putting elements which are less than pivot on one side and which are greater that on other.
-        for (int j = l + 1; j <= r; j++) {
+        for (int j = l; j < r; j++) {
             if (arr[j] < pivot) {
                 swap(arr, i, j);
                 i++;
             }
         }
-        swap(arr, l, i - 1);//put the pivot element in its proper place.
-        return i - 1;//return the position of the pivot
+        swap(arr, i, r);
+        return i;
     }
 
     private static void swap(int[] arr, int i, int largestIndex) {
